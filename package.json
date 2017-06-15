@@ -1,5 +1,5 @@
 {
-  "name": "shallowMemoize",
+  "name": "shallow-memoize",
   "version": "0.0.1",
   "description": "Shallow compare function arguments for memoization",
   "main": "./index.js",
@@ -9,5 +9,7 @@
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.5.2",
     "fs-extra": "^3.0.1"
-  }
+  },
+  "repository": "https://github.com/blackChef/shallowMemoize.git",
+  "author": "blackChef <hongpidai@gmail.com>"
 }
