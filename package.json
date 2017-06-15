@@ -1,0 +1,13 @@
+{
+  "name": "shallowMemoize",
+  "version": "0.0.1",
+  "description": "Shallow compare function arguments for memoization",
+  "main": "./index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.2",
+    "fs-extra": "^3.0.1"
+  }
+}
