@@ -4,55 +4,54 @@ let isShallowEqual = function(arr1, arr2) {
     return false;
   }
 
-  // f true, [], _ = true
-  // f true, [a], [b] = f undefined, [a], [b]
-  // f false, _, _ = false
-  // f undefined, [a, ...as] [b, ...bs] = f a === b, [as], [bs]
-  let compare = function(isEqual, arr1, arr2) {
-    if (isEqual === undefined) {
-      let [a, ...restArr1] = arr1;
-      let [b, ...restArr2] = arr2;
-      return compare(a === b, restArr1, restArr2);
+  let ret = true;
+  let i = 0;
+  while (i < arr1.length) {
+    let arr1Item = arr1[i];
+    let arr2Item = arr2[i];
+    if (arr1Item !== arr2Item) {
+      ret = false;
+      break;
     }
+    i += 1;
+  }
 
-    else if (isEqual === false) {
-      return false;
-    }
-
-    else if (isEqual === true) {
-      if (arr1.length === 0) {
-        return true;
-      }
-
-      else {
-        return compare(undefined, arr1, arr2);
-      }
-    }
-  };
-
-  return compare(undefined, arr1, arr2);
+  return ret;
 };
 
 let findCachedResult = function(cacheStore, args) {
   let target = cacheStore.find(function(item) {
     return isShallowEqual(item.args, args);
   });
-  return target === undefined ? undefined : target.result;
+
+  let ret = target === undefined ?
+    undefined :
+    target.result;
+
+  return ret;
 };
 
-let memoize = function(fn) {
+let identity = a => a;
+
+let memoize = function(fn, argumentsResolver = identity) {
   let cacheStore = [
     // { args: [], result }
   ];
-
   return function(...args) {
-    let cachedResult = findCachedResult(cacheStore, args);
+    let resolvedArgs = argumentsResolver(args);
+
+    if (!Array.isArray(resolvedArgs)) {
+      throw 'shallow-memoize: argumentsResolver should return an array';
+    }
+
+    let cachedResult = findCachedResult(cacheStore, resolvedArgs);
     if (cachedResult !== undefined) {
+      // console.log('hit cache', args);
       return cachedResult;
     }
 
     let result = fn(...args);
-    cacheStore.push({ args, result });
+    cacheStore.push({ args: resolvedArgs, result });
     return result;
   };
 };
