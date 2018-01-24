@@ -1,8 +1,8 @@
 {
   "name": "shallow-memoize",
-  "version": "0.0.1",
-  "description": "Shallow compare function arguments for memoization",
-  "main": "./index.js",
+  "version": "0.0.5",
+  "description": "Memoization with ability to set cache size and use shallow comparison",
+  "main": "./dist/index.js",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.25.0",

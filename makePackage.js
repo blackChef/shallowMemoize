@@ -1,20 +1,21 @@
 let { transformFileSync } = require('babel-core');
-let { outputFileSync } = require('fs-extra');
+let { outputFileSync, readdirSync } = require('fs-extra');
+let { resolve } = require('path');
 
 let babelOpts = {
   babelrc: false,
   presets: [
     ['env', {
       targets: { browser: [`last 6 versions`] },
-      modules: false,
-      loose: true,
     }]
   ]
 };
 
-let doBabel = filePath => transformFileSync(filePath, babelOpts);
+let doBabel = filePath => transformFileSync(filePath, babelOpts).code;
 
-outputFileSync(
-  './index.js',
-  doBabel('./index.jsx').code
-);
+readdirSync('./src').forEach(function(item) {
+  outputFileSync(
+    resolve('./dist', item.replace('.jsx', '.js')),
+    doBabel(resolve('./src', item))
+  );
+});
