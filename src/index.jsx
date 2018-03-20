@@ -35,7 +35,7 @@ let memoize = function(fn, opts = {}) {
 
   return function(...args) {
     let targetCache = findCache(args);
-    if (targetCache) {
+    if (targetCache !== undefined) {
       return targetCache;
     }
 

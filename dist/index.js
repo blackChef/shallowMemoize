@@ -57,7 +57,7 @@ var memoize = function memoize(fn) {
     }
 
     var targetCache = findCache(args);
-    if (targetCache) {
+    if (targetCache !== undefined) {
       return targetCache;
     }
 

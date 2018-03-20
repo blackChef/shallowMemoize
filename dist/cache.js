@@ -33,7 +33,7 @@ var findCache = function findCache(cache, finder, targetKey) {
     return finder(targetKey, key);
   });
 
-  if (!targetCache) return;
+  if (targetCache === undefined) return;
 
   var _targetCache = _slicedToArray(targetCache, 2),
       val = _targetCache[0].val,
@@ -66,7 +66,7 @@ var createCache = function createCache() {
 
   var _findCache = function _findCache(targetKey) {
     var cacheTarget = findCache(cache, cacheFinder, targetKey);
-    if (!cacheTarget) return;
+    if (cacheTarget === undefined) return;
 
     var _cacheTarget = _slicedToArray(cacheTarget, 2),
         val = _cacheTarget[0],

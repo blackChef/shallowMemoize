@@ -21,7 +21,7 @@ let findCache = function(cache, finder, targetKey) {
     return finder(targetKey, key);
   });
 
-  if (!targetCache) return;
+  if (targetCache === undefined) return;
 
   let [{ val }, index] = targetCache;
   let newCache = moveToBottom(cache, index);
@@ -49,7 +49,7 @@ let createCache = function(props = {}) {
 
   let _findCache = function(targetKey) {
     let cacheTarget = findCache(cache, cacheFinder, targetKey);
-    if (!cacheTarget) return;
+    if (cacheTarget === undefined) return;
     let [val, newCache] = cacheTarget;
     cache = newCache;
     return val;
