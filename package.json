@@ -1,6 +1,6 @@
 {
   "name": "shallow-memoize",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Memoization with ability to set cache size and use shallow comparison",
   "main": "./dist/index.js",
   "license": "MIT",
